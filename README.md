@@ -7,7 +7,7 @@ Handbuch zum Universum Explorer
 
 Dieses Programm ermöglicht es Ihnen, in der 'Gottes Karte des Universums' 
 https://astrodicticum-simplex.at/2010/01/gott-veroffentlicht-karte-des-universums/
-einzelne Objekte anzuglicken, um Bilder und zusätzliche Informationen darüber zu erhalten.
+einzelne Objekte anzuklicken, um Bilder und zusätzliche Informationen darüber zu erhalten.
 Dieses Handbuch bietet eine ausführliche Anleitung zur Nutzung aller Funktionen des Programms.
 
 Installation
@@ -21,6 +21,7 @@ Starten des Programms:
 
 Kompilieren und starten Sie die Hauptklasse UniversumExplorer.
 Beim ersten Start werden Sie aufgefordert, eine SQLite-Datenbank auszuwählen. Diese Einstellung wird gespeichert und automatisch beim nächsten Start geladen.
+Dazu kann die vorhandene Datenbank universum.db zuvor in ein beliebiges Verzeichnis kopiert werden.
 
 Funktionen
 
