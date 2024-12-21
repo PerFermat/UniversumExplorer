@@ -13,7 +13,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.nio.file.Files;
-import java.text.DecimalFormat;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -27,7 +26,7 @@ import javax.swing.SwingConstants;
 
 class DetailAnsicht extends JFrame {
 	public DetailAnsicht(BildPunkt punkt) {
-		setTitle(punkt.name + " " + berechneEntfernung(punkt.y));
+		setTitle(punkt.name + "  -   " + berechneEntfernung(punkt.y));
 		setSize(800, 600);
 		setLayout(new BorderLayout());
 
@@ -123,22 +122,32 @@ class DetailAnsicht extends JFrame {
 	}
 
 	private String berechneEntfernung(int y) {
-		int referenzy = 14317;
-		int schrittweite = 600;
+		int referenzy = 14315;
+		int schrittweite = 599;
 		double faktor = 10;
 		double entfernungInKm = (Math.pow(faktor, (double) (referenzy - y) / schrittweite)) - 6370;
-		if (entfernungInKm < 1_000_000) {
-			// Formatieren auf zwei Nachkommastellen
-			DecimalFormat df = new DecimalFormat("#.##");
-			return df.format(entfernungInKm) + " km";
-		} else if (entfernungInKm < 1.496e11) {
-			double entfernungInAU = entfernungInKm / 1.496e8;
-			DecimalFormat df = new DecimalFormat("#.##");
-			return df.format(entfernungInAU) + " AU";
+		return formatiereEntfernung(entfernungInKm);
+	}
+
+	public static String formatiereEntfernung(double entfernungInKm) {
+		if (entfernungInKm < 1.496e8) {
+			return String.format("Entfernung: %.2f km", entfernungInKm);
+		}
+
+		double entfernungInAU = entfernungInKm / 1.496e8;
+		double entfernungInParsec = entfernungInKm / 3.086e13;
+		double entfernungInKiloparsec = entfernungInKm / 3.086e16;
+		double entfernungInMegaparsec = entfernungInKm / 3.086e19;
+		double entfernungInLichtjahren = entfernungInKm / (1.496e8 * 63241);
+
+		if (entfernungInMegaparsec >= 1) {
+			return String.format("Entfernung: %.2f Mpc (%.2f LJ)", entfernungInMegaparsec, entfernungInLichtjahren);
+		} else if (entfernungInKiloparsec >= 1) {
+			return String.format("Entfernung: %.2f kpc (%.2f LJ)", entfernungInKiloparsec, entfernungInLichtjahren);
+		} else if (entfernungInParsec >= 1) {
+			return String.format("Entfernung: %.2f pc (%.2f LJ)", entfernungInParsec, entfernungInLichtjahren);
 		} else {
-			double entfernungInLichtjahre = entfernungInKm / (1.496e8 * 63_241);
-			DecimalFormat df = new DecimalFormat("#.##");
-			return df.format(entfernungInLichtjahre) + " LJ";
+			return String.format("Entfernung: %.2f AU", entfernungInAU);
 		}
 	}
 }
