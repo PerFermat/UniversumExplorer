@@ -1,0 +1,35 @@
+{
+	"folders": {},
+	"connections": {
+		"sqlite_jdbc-193e5b4c777-54e2772b9a9e2a7": {
+			"provider": "sqlite",
+			"driver": "sqlite_jdbc",
+			"name": "universum.db",
+			"save-password": true,
+			"configuration": {
+				"database": "/home/michael/Nextcloud/Java/BildUniversum/universum.db",
+				"url": "jdbc:sqlite:/home/michael/Nextcloud/Java/BildUniversum/universum.db",
+				"configurationType": "MANUAL",
+				"type": "dev",
+				"closeIdleConnection": true,
+				"auth-model": "native"
+			}
+		}
+	},
+	"connection-types": {
+		"dev": {
+			"name": "Development",
+			"color": "255,255,255",
+			"description": "Regular development database",
+			"auto-commit": true,
+			"confirm-execute": false,
+			"confirm-data-change": false,
+			"smart-commit": false,
+			"smart-commit-recover": true,
+			"auto-close-transactions": true,
+			"close-transactions-period": 1800,
+			"auto-close-connections": true,
+			"close-connections-period": 14400
+		}
+	}
+}
