@@ -20,7 +20,7 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.13.0</version>
 				<configuration>
-					<release>21</release>
+					<release>15</release>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -33,6 +33,7 @@
 					<archive>
 						<manifest>
 							<mainClass>Universum.UniversumExplorer</mainClass>
+							
 						</manifest>
 					</archive>
 				</configuration>
@@ -58,12 +59,13 @@
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-slf4j-impl</artifactId>
-			<version>2.20.0</version> <!-- oder die aktuelle Version -->
+			<version>2.24.3</version> <!-- oder die aktuelle Version -->
 		</dependency>
+		
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
-			<version>1.4.11</version> <!-- oder die aktuelle Version -->
+			<version>1.5.15</version> <!-- oder die aktuelle Version -->
 		</dependency>
 	</dependencies>
 </project>

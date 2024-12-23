@@ -11,6 +11,8 @@ import java.awt.event.ComponentEvent;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
 
@@ -80,12 +82,7 @@ class DetailAnsicht extends JFrame {
 
 		JButton webButton = new JButton("Webseite öffnen");
 		webButton.addActionListener(e -> {
-			try {
-				Runtime.getRuntime().exec("xdg-open " + punkt.webURL); // Linux-Standard
-			} catch (Exception ex) {
-				JOptionPane.showMessageDialog(this, "Webseite konnte nicht geöffnet werden.", "Fehler",
-						JOptionPane.ERROR_MESSAGE);
-			}
+			openURL(punkt.webURL);
 		});
 
 		JButton bildButton = new JButton("Bild anzeigen");
@@ -108,7 +105,9 @@ class DetailAnsicht extends JFrame {
 		});
 
 		JButton beendenButton = new JButton("Beenden");
-		beendenButton.addActionListener(e -> dispose());
+		beendenButton.addActionListener(e ->
+
+		dispose());
 
 		buttonPanel.add(webButton);
 		buttonPanel.add(bildButton);
@@ -121,7 +120,19 @@ class DetailAnsicht extends JFrame {
 		setLocationRelativeTo(null); // Fenster in der Bildschirmmitte platzieren
 	}
 
-	private String berechneEntfernung(int y) {
+	public static String berechneRektaszension(int x) {
+		double referenzy = 2176.61;
+		double schrittweite = 68.09;
+
+		double rektazession = (-x + referenzy) / schrittweite;
+
+		if (rektazession > 24) {
+			rektazession -= 24;
+		}
+		return String.format("Rektaszession: %.2f a", rektazession);
+	}
+
+	public static String berechneEntfernung(int y) {
 		int referenzy = 14315;
 		int schrittweite = 599;
 		double faktor = 10;
@@ -148,6 +159,26 @@ class DetailAnsicht extends JFrame {
 			return String.format("Entfernung: %.0f pc (%.0f LJ)", entfernungInParsec, entfernungInLichtjahren);
 		} else {
 			return String.format("Entfernung: %.0f AU", entfernungInAU);
+		}
+	}
+
+	public static void openURL(String url) {
+		if (Desktop.isDesktopSupported()) {
+			try {
+				Desktop desktop = Desktop.getDesktop();
+				if (desktop.isSupported(Desktop.Action.BROWSE)) {
+					desktop.browse(new URI(url));
+					return;
+				}
+			} catch (IOException | URISyntaxException e) {
+				System.err.println("Desktop.browse fehlgeschlagen: " + e.getMessage());
+			}
+		}
+		// Fallback: xdg-open verwenden
+		try {
+			Runtime.getRuntime().exec("xdg-open " + url);
+		} catch (IOException e) {
+			System.err.println("xdg-open fehlgeschlagen: " + e.getMessage());
 		}
 	}
 }

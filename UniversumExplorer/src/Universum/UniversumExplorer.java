@@ -2,6 +2,8 @@ package Universum;
 
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
@@ -49,6 +51,25 @@ class HauptFenster extends JFrame {
 			public void componentResized(ComponentEvent e) {
 				bildPanel.revalidate();
 				bildPanel.repaint();
+			}
+		});
+
+		bildPanel.addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				// Bildgröße und Skalierung berücksichtigen
+				double faktorX = (double) bildPanel.getOriginalImageWidth() / bildPanel.getWidth();
+				double faktorY = (double) bildPanel.getOriginalImageHeight() / bildPanel.getHeight();
+
+				int originalX = (int) (e.getX() * faktorX);
+				int originalY = (int) (e.getY() * faktorY);
+
+				// Entfernung berechnen
+				String entfernung = DetailAnsicht.berechneEntfernung(originalY);
+				String rektazession = DetailAnsicht.berechneRektaszension(originalX);
+
+				// Anzeige der Werte im Fenster-Titel
+				setTitle(entfernung + " | " + rektazession);
 			}
 		});
 	}

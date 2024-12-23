@@ -4,6 +4,7 @@ Universum/HauptFenster.class
 Universum/PunktEditor.class
 Universum/PunktEditor$PunktSpeicherCallback.class
 Universum/DatenbankManager.class
+Universum/HauptFenster$2.class
 Universum/BildPanel.class
 Universum/BegrüßungsPanel.class
 Universum/PunktKorrekturEditor$KorrekturCallback.class
