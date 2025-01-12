@@ -87,5 +87,5 @@ Beim ersten Start wird die Datenbankkonfiguration in einer Datei gespeichert.
 Diese Datei wird beim Start gelesen, um die Datenbank automatisch zu laden.
 Der Speicherort der Datei ist im aktuellen Verzeichnis des Programms.
 
-
+Bei Fragen: Mail an Klausi11235@web.de
 
