@@ -15,7 +15,7 @@ Installation
 Voraussetzungen:
 
 - Java
-- Eine vorhandene SQLite-Datenbank oder die Möglichkeit, eine neue anzulegen.
+- Eine vorhandene SQLite-Datenbank oder die Möglichkeit, eine neue anzulegen. Eine SQLite-Datenbank ist hier verfügbar: https://github.com/PerFermat/UniversumExplorer/blob/main/UniversumExplorer/universum.db
 
 Starten des Programms:
 
