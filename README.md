@@ -14,7 +14,7 @@ Installation
 
 Voraussetzungen:
 
-- Java Development Kit (JDK) 11 oder höher.
+- Java
 - Eine vorhandene SQLite-Datenbank oder die Möglichkeit, eine neue anzulegen.
 
 Starten des Programms:
