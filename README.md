@@ -87,15 +87,5 @@ Beim ersten Start wird die Datenbankkonfiguration in einer Datei gespeichert.
 Diese Datei wird beim Start gelesen, um die Datenbank automatisch zu laden.
 Der Speicherort der Datei ist im aktuellen Verzeichnis des Programms.
 
-Organisierte Datenpflege:
 
-Verwenden Sie sinnvolle Namen und URLs, um die Punkte leicht identifizieren zu können.
-
-Regelmäßige Sicherungen:
-
-Erstellen Sie Backups der SQLite-Datenbank, um Datenverlust zu vermeiden.
-
-Optimale Bildauflösung:
-
-Verwenden Sie Bilder mit einer Auflösung, die gut zur Größe Ihres Bildschirms passt.
 
