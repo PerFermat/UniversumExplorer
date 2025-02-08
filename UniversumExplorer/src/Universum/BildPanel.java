@@ -77,7 +77,7 @@ class BildPanel extends JPanel {
 		return image.getHeight(null);
 	}
 
-	private BildPunkt findeNächstenPunkt(int originalX, int originalY) {
+	public BildPunkt findeNächstenPunkt(int originalX, int originalY) {
 		BildPunkt nächsterPunkt = null;
 		double minimalerAbstand = Double.MAX_VALUE;
 

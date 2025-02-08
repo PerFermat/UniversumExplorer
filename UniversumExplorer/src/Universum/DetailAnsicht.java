@@ -15,6 +15,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
+import java.text.DecimalFormat;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -28,7 +29,10 @@ import javax.swing.SwingConstants;
 
 class DetailAnsicht extends JFrame {
 	public DetailAnsicht(BildPunkt punkt) {
-		setTitle(punkt.name + "  -   " + berechneEntfernung(punkt.y));
+		String rektazession = DetailAnsicht.berechneRektaszension(punkt.x);
+		setTitle(punkt.name + "  -   " + berechneEntfernung(punkt.y) + " - " + rektazession);
+
+		// Anzeige der Werte im Fenster-Titel
 		setSize(800, 600);
 		setLayout(new BorderLayout());
 
@@ -129,7 +133,12 @@ class DetailAnsicht extends JFrame {
 		if (rektazession > 24) {
 			rektazession -= 24;
 		}
-		return String.format("Rektaszession: %.2f a", rektazession);
+
+		int vorkommaTeil = (int) rektazession;
+		int nachkommaTeil = (int) ((rektazession - vorkommaTeil) * 100);
+
+		int min = (nachkommaTeil * 60) / 100;
+		return String.format("Rektaszession: " + vorkommaTeil + " h " + min + " min ");
 	}
 
 	public static String berechneEntfernung(int y) {
@@ -141,8 +150,10 @@ class DetailAnsicht extends JFrame {
 	}
 
 	public static String formatiereEntfernung(double entfernungInKm) {
+		DecimalFormat formatter = new DecimalFormat("###,###,###,###,###,###,###.##");
 		if (entfernungInKm < 1.496e8) {
-			return String.format("Entfernung: %.0f km", entfernungInKm);
+			formatter.format(entfernungInKm);
+			return String.format("Entfernung: " + formatter.format(entfernungInKm) + " km");
 		}
 
 		double entfernungInAU = entfernungInKm / 1.496e8;
@@ -150,15 +161,18 @@ class DetailAnsicht extends JFrame {
 		double entfernungInKiloparsec = entfernungInKm / 3.086e16;
 		double entfernungInMegaparsec = entfernungInKm / 3.086e19;
 		double entfernungInLichtjahren = entfernungInKm / (1.496e8 * 63241);
-
 		if (entfernungInMegaparsec >= 1) {
-			return String.format("Entfernung: %.0f Mpc (%.0f LJ)", entfernungInMegaparsec, entfernungInLichtjahren);
+			return String.format("Entfernung: " + formatter.format(entfernungInMegaparsec) + " mpc ("
+					+ formatter.format(entfernungInLichtjahren) + " LJ)");
 		} else if (entfernungInKiloparsec >= 1) {
-			return String.format("Entfernung: %.0f kpc (%.0f LJ)", entfernungInKiloparsec, entfernungInLichtjahren);
+			return String.format("Entfernung: " + formatter.format(entfernungInKiloparsec) + " kpc ("
+					+ formatter.format(entfernungInLichtjahren) + " LJ)");
 		} else if (entfernungInParsec >= 1) {
-			return String.format("Entfernung: %.0f pc (%.0f LJ)", entfernungInParsec, entfernungInLichtjahren);
+			return String.format("Entfernung: " + formatter.format(entfernungInParsec) + " pc ("
+					+ formatter.format(entfernungInLichtjahren) + " LJ)");
 		} else {
-			return String.format("Entfernung: %.0f AU", entfernungInAU);
+			return String.format("Entfernung: " + formatter.format(entfernungInAU) + " AU ("
+					+ formatter.format(entfernungInKm) + " km)");
 		}
 	}
 

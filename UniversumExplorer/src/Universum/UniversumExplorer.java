@@ -58,6 +58,7 @@ class HauptFenster extends JFrame {
 			@Override
 			public void mouseMoved(MouseEvent e) {
 				// Bildgröße und Skalierung berücksichtigen
+
 				double faktorX = (double) bildPanel.getOriginalImageWidth() / bildPanel.getWidth();
 				double faktorY = (double) bildPanel.getOriginalImageHeight() / bildPanel.getHeight();
 
